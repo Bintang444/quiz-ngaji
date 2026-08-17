@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#60a5fa" />
+      <stop offset="1" stop-color="#2563eb" />
+    </linearGradient>
+    <mask id="moonmask">
+      <rect width="512" height="512" fill="white" />
+      <circle cx="330" cy="205" r="150" fill="black" />
+    </mask>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+  <circle cx="225" cy="275" r="160" fill="#fde047" mask="url(#moonmask)" />
+  <path d="M256 95 L292 200 L400 200 L316 262 L344 365 L256 300 L168 365 L196 262 L112 200 L220 200 Z" fill="#fde047" />
+</svg>
