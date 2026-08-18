@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Music, VolumeX } from 'lucide-react';
 import { useKuis } from './hooks/useKuis';
 import { pustakaAudio } from './utils/audio';
-import { PAKET_SOAL } from './data/soal';
 import HomeScreen from './components/HomeScreen';
 import SetupGiliranScreen from './components/SetupGiliranScreen';
 import GachaScreen from './components/GachaScreen';
@@ -10,9 +9,7 @@ import PlayingScreen from './components/PlayingScreen';
 import ResultScreen from './components/ResultScreen';
 
 export default function App() {
-  const kodeUrl = new URLSearchParams(window.location.search).get('kode') ?? undefined;
-  const kodeAwal = kodeUrl && PAKET_SOAL[kodeUrl] ? kodeUrl : undefined;
-  const kuis = useKuis(kodeAwal);
+  const kuis = useKuis();
   const [musikOn, setMusikOn] = useState(true);
 
   useEffect(() => {
@@ -42,7 +39,7 @@ export default function App() {
       </button>
 
       <div className="relative z-10 w-full h-screen overflow-y-auto overflow-x-hidden scroll-smooth">
-        {kuis.gameState === 'home' && <HomeScreen onPilihMode={kuis.handlePilihMode} onPilihKode={kuis.pilihKode} />}
+        {kuis.gameState === 'home' && <HomeScreen onPilihMode={kuis.handlePilihMode} />}
         {kuis.gameState === 'setup' && (
           <SetupGiliranScreen
             daftarAnak={kuis.daftarAnak}
