@@ -1,9 +1,12 @@
 import { useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { Lightbulb, PartyPopper, Star } from 'lucide-react';
-import type { Soal } from '../types';
+import type { Rarity, Soal } from '../types';
 import GambarSoal from './GambarSoal';
 import { pustakaAudio } from '../utils/audio';
+
+const RARITY_BG: Record<Rarity, string> = { ur: 'bg-ur', sr: 'bg-sr', r: 'bg-r', c: 'bg-c' };
+const RARITY_LABEL: Record<Rarity, string> = { ur: 'BINTANG ULTRA!', sr: 'BINTANG SUPER!', r: 'BINTANG RARE!', c: 'BINTANG!' };
 
 interface Props {
   mode: 'giliran' | 'rame-rame' | null;
@@ -14,6 +17,7 @@ interface Props {
   soalTerjawab: number;
   totalSoal: number;
   skorKolektif: number;
+  bintangRarity: Rarity | null;
   jawabanDipilih: string | null;
   isBenar: boolean | null;
   feedbackAnim: string;
@@ -31,6 +35,7 @@ export default function PlayingScreen({
   soalTerjawab,
   totalSoal,
   skorKolektif,
+  bintangRarity,
   jawabanDipilih,
   isBenar,
   feedbackAnim,
@@ -130,9 +135,16 @@ export default function PlayingScreen({
                 </p>
               </div>
               {isBenar ? (
-                <p className="text-center text-2xl md:text-4xl font-black mt-2 text-amber-500 bg-amber-50 rounded-full py-2 border-4 border-amber-200 flex items-center justify-center gap-2">
-                  +1 Bintang! <Star className="w-6 h-6 md:w-9 md:h-9" fill="currentColor" strokeWidth={1.5} />
-                </p>
+                <div className="mt-2 text-center">
+                  <p className="text-center text-2xl md:text-4xl font-black mt-2 text-amber-500 bg-amber-50 rounded-full py-2 border-4 border-amber-200 flex items-center justify-center gap-2">
+                    +1 Bintang! <Star className="w-6 h-6 md:w-9 md:h-9" fill="currentColor" strokeWidth={1.5} />
+                  </p>
+                  {bintangRarity && (
+                    <div className={`${RARITY_BG[bintangRarity]} mt-3 rounded-full px-6 py-2 inline-block shadow-lg`}>
+                      <span className="text-white font-black text-sm md:text-lg tracking-widest drop-shadow">{RARITY_LABEL[bintangRarity]}</span>
+                    </div>
+                  )}
+                </div>
               ) : (
                 <div className="mt-2 text-center">
                   <p className="text-sm md:text-lg font-bold text-rose-500">Nggak apa-apa, yuk ingat lagi!</p>

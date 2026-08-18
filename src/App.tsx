@@ -58,6 +58,7 @@ export default function App() {
             hasSpun={kuis.hasSpun}
             putarGacha={kuis.putarGacha}
             masukKeSoalGiliran={kuis.masukKeSoalGiliran}
+            lewatiGiliran={kuis.lewatiGiliran}
             resetGame={kuis.resetGame}
           />
         )}
@@ -71,6 +72,7 @@ export default function App() {
             soalTerjawab={kuis.soalTerjawab}
             totalSoal={kuis.totalSoal}
             skorKolektif={kuis.skorKolektif}
+            bintangRarity={kuis.bintangRarity}
             jawabanDipilih={kuis.jawabanDipilih}
             isBenar={kuis.isBenar}
             feedbackAnim={kuis.feedbackAnim}

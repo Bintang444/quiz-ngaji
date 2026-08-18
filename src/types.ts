@@ -1,5 +1,7 @@
 export type Mode = 'giliran' | 'rame-rame';
 
+export type Rarity = 'ur' | 'sr' | 'r' | 'c';
+
 export type GameState = 'home' | 'setup' | 'gacha' | 'playing' | 'result';
 
 export interface Soal {

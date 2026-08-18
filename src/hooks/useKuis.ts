@@ -1,9 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
-import type { GameState, Mode, Soal } from '../types';
+import confetti from 'canvas-confetti';
+import type { GameState, Mode, Rarity, Soal } from '../types';
 import { BANK_SOAL } from '../data/soal';
 import { pustakaAudio } from '../utils/audio';
 
 const JUMLAH_SOAL_DEFAULT = 7;
+
+function acakDaftar(arr: string[]): string[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function pilihRarityBenar(): Rarity {
+  const rand = Math.random();
+  if (rand < 0.1) return 'ur';
+  if (rand < 0.35) return 'sr';
+  return 'r';
+}
 
 export function useKuis() {
   const [mode, setMode] = useState<Mode | null>(null);
@@ -24,6 +41,7 @@ export function useKuis() {
   const [jawabanDipilih, setJawabanDipilih] = useState<string | null>(null);
   const [isBenar, setIsBenar] = useState<boolean | null>(null);
   const [feedbackAnim, setFeedbackAnim] = useState('');
+  const [bintangRarity, setBintangRarity] = useState<Rarity | null>(null);
   const [totalSoal, setTotalSoal] = useState(JUMLAH_SOAL_DEFAULT);
   const autoTimer = useRef<number | null>(null);
 
@@ -75,7 +93,7 @@ export function useKuis() {
 
   const mulaiGiliran = () => {
     if (daftarAnak.length > 0) {
-      setAnakBelumMaju([...daftarAnak]);
+      setAnakBelumMaju(acakDaftar(daftarAnak));
       setSoalTerjawab(0);
       setGameState('gacha');
       setGachaNameDisplay('???');
@@ -90,19 +108,31 @@ export function useKuis() {
     let counter = 0;
 
     const spinInterval = setInterval(() => {
-      const randomDummy = daftarAnak[Math.floor(Math.random() * daftarAnak.length)];
+      const randomDummy = anakBelumMaju[Math.floor(Math.random() * anakBelumMaju.length)];
       setGachaNameDisplay(randomDummy);
       pustakaAudio.tick();
       counter++;
 
       if (counter > 25) {
         clearInterval(spinInterval);
-        const winner = anakBelumMaju[Math.floor(Math.random() * anakBelumMaju.length)];
+        const winner = anakBelumMaju[0];
         setAnakTerpilih(winner);
         setGachaNameDisplay(winner);
         setIsSpinning(false);
-        setAnakBelumMaju((prev) => prev.filter((n) => n !== winner));
+        setAnakBelumMaju((prev) => prev.slice(1));
         pustakaAudio.selesaiPutar();
+
+        const flash = document.getElementById('flashBang');
+        if (flash) {
+          flash.classList.add('is-flashing');
+          setTimeout(() => flash.classList.remove('is-flashing'), 250);
+        }
+        confetti({
+          particleCount: 90,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#3b82f6', '#a855f7', '#ffdf00', '#f59e0b'],
+        });
       }
     }, 80);
   };
@@ -123,6 +153,7 @@ export function useKuis() {
 
     if (benar) {
       setSkorKolektif((prev) => prev + 1);
+      setBintangRarity(pilihRarityBenar());
       autoTimer.current = window.setTimeout(() => {
         lanjutkanGame();
       }, 2000);
@@ -137,6 +168,7 @@ export function useKuis() {
     setJawabanDipilih(null);
     setIsBenar(null);
     setFeedbackAnim('');
+    setBintangRarity(null);
 
     if (mode === 'giliran') {
       if (anakBelumMaju.length > 0) {
@@ -158,6 +190,10 @@ export function useKuis() {
     }
   };
 
+  const lewatiGiliran = () => {
+    lanjutkanGame();
+  };
+
   const resetGame = () => {
     if (autoTimer.current !== null) {
       clearTimeout(autoTimer.current);
@@ -168,6 +204,7 @@ export function useKuis() {
     setDaftarAnak([]);
     setAnakBelumMaju([]);
     setJawabanDipilih(null);
+    setBintangRarity(null);
   };
 
   return {
@@ -185,6 +222,7 @@ export function useKuis() {
     gachaNameDisplay,
     isSpinning,
     hasSpun,
+    bintangRarity,
     jawabanDipilih,
     isBenar,
     feedbackAnim,
@@ -195,6 +233,7 @@ export function useKuis() {
     masukKeSoalGiliran,
     jawabSoal,
     lanjutSoal: lanjutkanGame,
+    lewatiGiliran,
     resetGame,
   };
 }

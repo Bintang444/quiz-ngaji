@@ -6,7 +6,7 @@ interface Props {
   onPilihMode: (mode: Mode, jumlahSoal?: number) => void;
 }
 
-const PILIHAN_SOAL = [5, 7, 10, 15];
+const PILIHAN_SOAL = [5, 7, 10, 15, 20, 25];
 
 export default function HomeScreen({ onPilihMode }: Props) {
   const [showSoalCount, setShowSoalCount] = useState(false);

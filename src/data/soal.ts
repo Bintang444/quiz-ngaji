@@ -1,10 +1,10 @@
 import type { Soal } from '../types';
 
-// Bank Soal: 50 Pertanyaan seputar Malaikat & Para Nabi (Adam s.d. Yusuf)
+// Bank Soal: 100 Pertanyaan seputar Malaikat & Para Nabi (Adam s.d. Yusuf)
 // Untuk kuis interaktif anak kelas 1-2 SD
-// Hanya mencakup materi yang SUDAH diceritakan: Malaikat, Nabi Adam, Nuh, Ibrahim, Ismail, Ishaq, Ya'qub, Yusuf
+// Mencakup materi: Malaikat, Nabi Adam, Nuh, Ibrahim, Ismail, Ishaq, Ya'qub, Yusuf
 
-export const BANK_SOAL: Soal[] = [
+const BANK_SOAL_DASAR: Soal[] = [
   // ===== MALAIKAT (14 soal) =====
   {
     id: 1,
@@ -423,3 +423,431 @@ export const BANK_SOAL: Soal[] = [
     bgColor: 'bg-rose-100',
   },
 ];
+
+// ===================================================================
+// LANJUTAN 50 SOAL BERIKUTNYA (id 51-100)
+// Masih dalam cakupan: Malaikat + Nabi Adam s.d. Nabi Yusuf
+// ===================================================================
+
+export const BANK_SOAL_LANJUTAN: Soal[] = [
+  // ===== MALAIKAT (10 soal tambahan) =====
+  {
+    id: 51,
+    emoji: '🍽️',
+    pertanyaan: 'Malaikat berbeda dengan manusia karena malaikat tidak perlu...',
+    pilihan: ['Makan dan minum', 'Terbang', 'Bergerak', 'Beristirahat sebentar'],
+    jawabanBenar: 'Makan dan minum',
+    bgColor: 'bg-emerald-100',
+  },
+  {
+    id: 52,
+    emoji: '🕊️',
+    pertanyaan: 'Malaikat memiliki sayap yang digunakan untuk...',
+    pilihan: ['Berenang', 'Terbang', 'Berlari', 'Melompat'],
+    jawabanBenar: 'Terbang',
+    bgColor: 'bg-sky-100',
+  },
+  {
+    id: 53,
+    emoji: '🙏',
+    pertanyaan: 'Malaikat tidak pernah lelah karena mereka terus-menerus...',
+    pilihan: ['Bermain', 'Tidur', 'Bertasbih memuji Allah', 'Makan'],
+    jawabanBenar: 'Bertasbih memuji Allah',
+    bgColor: 'bg-purple-100',
+  },
+  {
+    id: 54,
+    emoji: '↔️',
+    pertanyaan: 'Malaikat Raqib mencatat amal kita dari sebelah kanan, sedangkan Malaikat Atid mencatat dari sebelah...',
+    pilihan: ['Kiri', 'Depan', 'Belakang', 'Atas'],
+    jawabanBenar: 'Kiri',
+    bgColor: 'bg-slate-100',
+  },
+  {
+    id: 55,
+    emoji: '💬',
+    pertanyaan: 'Di alam kubur, Malaikat Munkar dan Nakir akan bertanya kepada kita tentang siapa...',
+    pilihan: ['Teman kita', 'Tuhan kita', 'Guru kita', 'Tetangga kita'],
+    jawabanBenar: 'Tuhan kita',
+    bgColor: 'bg-stone-200',
+  },
+  {
+    id: 56,
+    emoji: '😇',
+    pertanyaan: 'Malaikat tidak pernah berbuat jahat karena malaikat tidak memiliki...',
+    pilihan: ['Sayap', 'Nafsu/keinginan buruk', 'Nama', 'Tugas'],
+    jawabanBenar: 'Nafsu/keinginan buruk',
+    bgColor: 'bg-teal-100',
+  },
+  {
+    id: 57,
+    emoji: '👻',
+    pertanyaan: 'Malaikat termasuk makhluk ghaib, artinya malaikat tidak bisa...',
+    pilihan: ['Dilihat mata manusia', 'Diciptakan Allah', 'Diberi tugas', 'Terbang'],
+    jawabanBenar: 'Dilihat mata manusia',
+    bgColor: 'bg-neutral-200',
+  },
+  {
+    id: 58,
+    emoji: '📖',
+    pertanyaan: 'Wahyu Allah yang dibawa turun oleh Malaikat Jibril kepada para Nabi berisi...',
+    pilihan: ['Kitab suci', 'Cerita dongeng', 'Peta harta karun', 'Resep masakan'],
+    jawabanBenar: 'Kitab suci',
+    bgColor: 'bg-pink-100',
+  },
+  {
+    id: 59,
+    emoji: '🚫',
+    pertanyaan: 'Malaikat selalu taat dan tidak pernah...',
+    pilihan: ['Terbang', 'Membangkang perintah Allah', 'Beribadah', 'Mencatat amal'],
+    jawabanBenar: 'Membangkang perintah Allah',
+    bgColor: 'bg-orange-100',
+  },
+  {
+    id: 60,
+    emoji: '🌍',
+    pertanyaan: 'Meskipun tidak terlihat, malaikat selalu ada di sekitar kita untuk...',
+    pilihan: ['Melaksanakan perintah Allah', 'Bermain-main', 'Mengganggu manusia', 'Beristirahat'],
+    jawabanBenar: 'Melaksanakan perintah Allah',
+    bgColor: 'bg-amber-100',
+  },
+
+  // ===== AQIDAH DASAR (2 soal tambahan) =====
+  {
+    id: 61,
+    emoji: '☝️',
+    pertanyaan: 'Allah itu Maha Esa, artinya Allah itu...',
+    pilihan: ['Hanya satu, tidak ada duanya', 'Banyak sekali', 'Bisa berubah-ubah', 'Sama seperti manusia'],
+    jawabanBenar: 'Hanya satu, tidak ada duanya',
+    bgColor: 'bg-yellow-100',
+  },
+  {
+    id: 62,
+    emoji: '🌟',
+    pertanyaan: 'Kita wajib mencontoh sifat-sifat baik para Nabi karena mereka adalah...',
+    pilihan: ['Teladan/contoh yang baik', 'Orang biasa saja', 'Tidak penting dicontoh', 'Hanya cerita dongeng'],
+    jawabanBenar: 'Teladan/contoh yang baik',
+    bgColor: 'bg-cyan-100',
+  },
+
+  // ===== NABI ADAM (5 soal tambahan) =====
+  {
+    id: 63,
+    emoji: '🙇',
+    pertanyaan: 'Saat Nabi Adam diciptakan, Allah memerintahkan para malaikat untuk...',
+    pilihan: ['Menjauhinya', 'Bersujud menghormatinya', 'Mengejeknya', 'Mengusirnya'],
+    jawabanBenar: 'Bersujud menghormatinya',
+    bgColor: 'bg-green-100',
+  },
+  {
+    id: 64,
+    emoji: '😈',
+    pertanyaan: 'Makhluk yang membangkang dan tidak mau sujud kepada Nabi Adam bernama...',
+    pilihan: ['Iblis', 'Jibril', 'Mikail', 'Israfil'],
+    jawabanBenar: 'Iblis',
+    bgColor: 'bg-red-100',
+  },
+  {
+    id: 65,
+    emoji: '🌏',
+    pertanyaan: 'Nabi Adam disebut sebagai bapak dari seluruh...',
+    pilihan: ['Hewan', 'Manusia', 'Tumbuhan', 'Malaikat'],
+    jawabanBenar: 'Manusia',
+    bgColor: 'bg-lime-100',
+  },
+  {
+    id: 66,
+    emoji: '🤲',
+    pertanyaan: 'Setelah bersalah, Nabi Adam bersungguh-sungguh bertaubat dan Allah pun...',
+    pilihan: ['Mengampuninya', 'Membiarkannya', 'Marah selamanya', 'Menghukumnya terus'],
+    jawabanBenar: 'Mengampuninya',
+    bgColor: 'bg-rose-100',
+  },
+  {
+    id: 67,
+    emoji: '🔤',
+    pertanyaan: 'Allah mengajarkan kepada Nabi Adam pengetahuan tentang nama-nama...',
+    pilihan: ['Benda-benda', 'Angka saja', 'Warna saja', 'Huruf saja'],
+    jawabanBenar: 'Benda-benda',
+    bgColor: 'bg-amber-100',
+  },
+
+  // ===== NABI NUH (5 soal tambahan) =====
+  {
+    id: 68,
+    emoji: '🌊',
+    pertanyaan: 'Kaum Nabi Nuh dihukum Allah dengan banjir besar karena mereka...',
+    pilihan: ['Terlalu rajin beribadah', 'Tidak mau beriman kepada Allah', 'Terlalu banyak berdagang', 'Suka menolong orang'],
+    jawabanBenar: 'Tidak mau beriman kepada Allah',
+    bgColor: 'bg-blue-100',
+  },
+  {
+    id: 69,
+    emoji: '🗿',
+    pertanyaan: 'Kaum Nabi Nuh melakukan kesalahan besar yaitu menyembah...',
+    pilihan: ['Berhala', 'Allah', 'Malaikat', 'Matahari saja'],
+    jawabanBenar: 'Berhala',
+    bgColor: 'bg-stone-200',
+  },
+  {
+    id: 70,
+    emoji: '👩',
+    pertanyaan: 'Istri Nabi Nuh termasuk orang yang tidak beriman, sehingga ia...',
+    pilihan: ['Ikut selamat naik kapal', 'Tidak selamat/ikut tenggelam', 'Menjadi Nabi juga', 'Pindah ke Mesir'],
+    jawabanBenar: 'Tidak selamat/ikut tenggelam',
+    bgColor: 'bg-slate-100',
+  },
+  {
+    id: 71,
+    emoji: '🕋',
+    pertanyaan: 'Nabi Nuh dikenal sebagai salah satu Rasul yang mengajak kaumnya untuk menyembah...',
+    pilihan: ['Berhala', 'Allah saja', 'Matahari', 'Bintang'],
+    jawabanBenar: 'Allah saja',
+    bgColor: 'bg-cyan-100',
+  },
+  {
+    id: 72,
+    emoji: '🚢',
+    pertanyaan: 'Yang boleh naik ke kapal Nabi Nuh adalah orang-orang yang...',
+    pilihan: ['Kaya raya', 'Beriman kepada Allah', 'Berbadan besar', 'Pandai berenang'],
+    jawabanBenar: 'Beriman kepada Allah',
+    bgColor: 'bg-teal-100',
+  },
+
+  // ===== NABI IBRAHIM (6 soal tambahan) =====
+  {
+    id: 73,
+    emoji: '🔨',
+    pertanyaan: 'Nabi Ibrahim menghancurkan berhala-berhala sesembahan kaumnya, kecuali satu berhala yang paling...',
+    pilihan: ['Kecil', 'Besar', 'Bagus', 'Baru'],
+    jawabanBenar: 'Besar',
+    bgColor: 'bg-red-100',
+  },
+  {
+    id: 74,
+    emoji: '👨',
+    pertanyaan: 'Ayah Nabi Ibrahim yang membuat dan menjual berhala bernama...',
+    pilihan: ['Azar', 'Namrud', 'Firaun', 'Jalut'],
+    jawabanBenar: 'Azar',
+    bgColor: 'bg-orange-200',
+  },
+  {
+    id: 75,
+    emoji: '💬',
+    pertanyaan: 'Nabi Ibrahim mengajak ayahnya berhenti menyembah berhala dan mulai menyembah...',
+    pilihan: ['Berhala yang lain', 'Allah', 'Matahari', 'Bintang'],
+    jawabanBenar: 'Allah',
+    bgColor: 'bg-stone-200',
+  },
+  {
+    id: 76,
+    emoji: '🌌',
+    pertanyaan: 'Sebelum yakin, Nabi Ibrahim sempat memperhatikan bintang, bulan, dan matahari untuk mencari tahu siapa Tuhan yang sebenarnya, sampai akhirnya beliau yakin bahwa Tuhan yang sebenarnya adalah...',
+    pilihan: ['Bintang', 'Bulan', 'Allah, pencipta semuanya', 'Matahari'],
+    jawabanBenar: 'Allah, pencipta semuanya',
+    bgColor: 'bg-indigo-100',
+  },
+  {
+    id: 77,
+    emoji: '😢',
+    pertanyaan: 'Ujian terberat Nabi Ibrahim adalah ketika diperintah Allah untuk menyembelih anaknya sendiri, yaitu Nabi...',
+    pilihan: ['Ishaq', 'Ismail', 'Yusuf', "Ya'qub"],
+    jawabanBenar: 'Ismail',
+    bgColor: 'bg-amber-100',
+  },
+  {
+    id: 78,
+    emoji: '🏜️',
+    pertanyaan: 'Nabi Ibrahim meninggalkan Siti Hajar dan Ismail kecil di padang pasir yang tandus atas perintah...',
+    pilihan: ['Raja Namrud', 'Allah', 'Keinginannya sendiri', 'Siti Sarah'],
+    jawabanBenar: 'Allah',
+    bgColor: 'bg-yellow-100',
+  },
+
+  // ===== NABI ISMAIL (4 soal tambahan) =====
+  {
+    id: 79,
+    emoji: '⛰️',
+    pertanyaan: 'Air Zam-zam muncul setelah Siti Hajar berlari-lari kecil mencari air di antara dua bukit bernama...',
+    pilihan: ['Shafa dan Marwah', 'Uhud dan Tursina', 'Judi dan Hira', 'Arafah dan Mina'],
+    jawabanBenar: 'Shafa dan Marwah',
+    bgColor: 'bg-blue-100',
+  },
+  {
+    id: 80,
+    emoji: '🕌',
+    pertanyaan: 'Peristiwa lari-lari kecil Siti Hajar itu kini diperingati umat Islam sebagai bagian dari ibadah...',
+    pilihan: ['Puasa', 'Haji', 'Sholat', 'Zakat'],
+    jawabanBenar: 'Haji',
+    bgColor: 'bg-sky-100',
+  },
+  {
+    id: 81,
+    emoji: '❤️',
+    pertanyaan: 'Nabi Ismail dikenal sebagai anak yang sangat... kepada orang tuanya',
+    pilihan: ['Nakal', 'Taat dan patuh', 'Malas', 'Cuek'],
+    jawabanBenar: 'Taat dan patuh',
+    bgColor: 'bg-emerald-100',
+  },
+  {
+    id: 82,
+    emoji: '1️⃣',
+    pertanyaan: 'Nabi Ismail adalah putra pertama (sulung) dari Nabi...',
+    pilihan: ['Ishaq', 'Ibrahim', "Ya'qub", 'Yusuf'],
+    jawabanBenar: 'Ibrahim',
+    bgColor: 'bg-orange-100',
+  },
+
+  // ===== NABI ISHAQ (3 soal tambahan) =====
+  {
+    id: 83,
+    emoji: '🌳',
+    pertanyaan: 'Keturunan Nabi Ishaq yang berlanjut melalui anaknya nanti dikenal dengan sebutan Bani...',
+    pilihan: ['Quraisy', 'Israil', 'Adnan', 'Hasyim'],
+    jawabanBenar: 'Israil',
+    bgColor: 'bg-violet-100',
+  },
+  {
+    id: 84,
+    emoji: '👵',
+    pertanyaan: 'Nabi Ishaq lahir ketika kedua orang tuanya, Nabi Ibrahim dan Siti Sarah, sudah berusia...',
+    pilihan: ['Sangat muda', 'Sangat tua/lanjut usia', 'Baru menikah', 'Remaja'],
+    jawabanBenar: 'Sangat tua/lanjut usia',
+    bgColor: 'bg-fuchsia-100',
+  },
+  {
+    id: 85,
+    emoji: '📿',
+    pertanyaan: 'Selain sebagai anak Nabi Ibrahim, Nabi Ishaq juga diangkat Allah menjadi seorang...',
+    pilihan: ['Nabi dan Rasul', 'Raja', 'Pedagang', 'Panglima perang'],
+    jawabanBenar: 'Nabi dan Rasul',
+    bgColor: 'bg-pink-100',
+  },
+
+  // ===== NABI YA'QUB (3 soal tambahan) =====
+  {
+    id: 86,
+    emoji: '😭',
+    pertanyaan: "Nabi Ya'qub sangat sedih kehilangan Yusuf hingga matanya menjadi... karena terlalu banyak menangis",
+    pilihan: ['Merah', 'Putih (tidak bisa melihat)', 'Bengkak saja', 'Berkedip terus'],
+    jawabanBenar: 'Putih (tidak bisa melihat)',
+    bgColor: 'bg-teal-100',
+  },
+  {
+    id: 87,
+    emoji: '👶',
+    pertanyaan: 'Adik kandung Nabi Yusuf (satu ibu) yang juga disayangi Nabi Ya\'qub bernama...',
+    pilihan: ['Bunyamin', 'Ishaq', 'Ismail', 'Idris'],
+    jawabanBenar: 'Bunyamin',
+    bgColor: 'bg-lime-100',
+  },
+  {
+    id: 88,
+    emoji: '👕',
+    pertanyaan: "Mata Nabi Ya'qub akhirnya bisa melihat kembali setelah diusap dengan...",
+    pilihan: ['Air Zam-zam', 'Baju Nabi Yusuf', 'Daun kurma', 'Minyak wangi'],
+    jawabanBenar: 'Baju Nabi Yusuf',
+    bgColor: 'bg-rose-100',
+  },
+
+  // ===== NABI YUSUF (12 soal tambahan) =====
+  {
+    id: 89,
+    emoji: '🏛️',
+    pertanyaan: 'Pejabat Mesir yang membeli Nabi Yusuf dan merawatnya dengan baik bernama...',
+    pilihan: ['Al-Aziz', 'Firaun', 'Namrud', 'Jalut'],
+    jawabanBenar: 'Al-Aziz',
+    bgColor: 'bg-yellow-100',
+  },
+  {
+    id: 90,
+    emoji: '🚶',
+    pertanyaan: 'Nabi Yusuf ditemukan di dalam sumur oleh serombongan...',
+    pilihan: ['Tentara', 'Musafir/pedagang', 'Nelayan', 'Petani'],
+    jawabanBenar: 'Musafir/pedagang',
+    bgColor: 'bg-orange-100',
+  },
+  {
+    id: 91,
+    emoji: '👕',
+    pertanyaan: 'Kakak-kakak Yusuf membawa pulang baju Yusuf yang dilumuri darah palsu sebagai bukti bohong bahwa Yusuf dimakan...',
+    pilihan: ['Singa', 'Serigala', 'Buaya', 'Ular'],
+    jawabanBenar: 'Serigala',
+    bgColor: 'bg-red-100',
+  },
+  {
+    id: 92,
+    emoji: '💭',
+    pertanyaan: 'Selain mimpi Raja, Nabi Yusuf juga pernah menafsirkan mimpi dua orang temannya di...',
+    pilihan: ['Sekolah', 'Penjara', 'Pasar', 'Kapal'],
+    jawabanBenar: 'Penjara',
+    bgColor: 'bg-indigo-100',
+  },
+  {
+    id: 93,
+    emoji: '👔',
+    pertanyaan: 'Setelah tafsir mimpinya terbukti benar, Nabi Yusuf diangkat menjadi pejabat yang mengurus...',
+    pilihan: ['Pasukan perang', 'Logistik/perbendaharaan makanan', 'Pembangunan istana', 'Perdagangan kain'],
+    jawabanBenar: 'Logistik/perbendaharaan makanan',
+    bgColor: 'bg-green-100',
+  },
+  {
+    id: 94,
+    emoji: '🌾',
+    pertanyaan: 'Berkat nasihat Nabi Yusuf, rakyat Mesir menyimpan hasil panen untuk menghadapi 7 tahun masa...',
+    pilihan: ['Perang', 'Paceklik/kekeringan', 'Liburan', 'Pembangunan'],
+    jawabanBenar: 'Paceklik/kekeringan',
+    bgColor: 'bg-amber-100',
+  },
+  {
+    id: 95,
+    emoji: '🐫',
+    pertanyaan: 'Saat musim paceklik, kakak-kakak Yusuf datang ke Mesir untuk membeli...',
+    pilihan: ['Emas', 'Gandum/makanan', 'Pakaian', 'Hewan ternak'],
+    jawabanBenar: 'Gandum/makanan',
+    bgColor: 'bg-yellow-200',
+  },
+  {
+    id: 96,
+    emoji: '🤔',
+    pertanyaan: 'Awalnya kakak-kakak Yusuf tidak mengenali dirinya karena Yusuf sudah menjadi seorang...',
+    pilihan: ['Petani biasa', 'Pejabat besar Mesir', 'Musafir miskin', 'Nelayan'],
+    jawabanBenar: 'Pejabat besar Mesir',
+    bgColor: 'bg-purple-100',
+  },
+  {
+    id: 97,
+    emoji: '🙏',
+    pertanyaan: 'Setelah bertemu kembali dengan kakak-kakaknya, Nabi Yusuf memilih untuk tidak balas dendam, melainkan tetap...',
+    pilihan: ['Bersyukur kepada Allah', 'Menyimpan dendam', 'Menjauhi mereka selamanya', 'Diam saja'],
+    jawabanBenar: 'Bersyukur kepada Allah',
+    bgColor: 'bg-rose-100',
+  },
+  {
+    id: 98,
+    emoji: '🌟',
+    pertanyaan: 'Mimpi Yusuf kecil tentang 11 bintang, matahari, dan bulan akhirnya menjadi kenyataan ketika seluruh keluarganya...',
+    pilihan: ['Pindah ke Mesir', 'Bersujud kepadanya', 'Melupakannya', 'Marah kepadanya'],
+    jawabanBenar: 'Bersujud kepadanya',
+    bgColor: 'bg-fuchsia-100',
+  },
+  {
+    id: 99,
+    emoji: '😊',
+    pertanyaan: 'Selain tampan wajahnya, Nabi Yusuf juga terkenal karena akhlaknya yang sangat...',
+    pilihan: ['Sombong', 'Mulia/baik', 'Pemarah', 'Pelit'],
+    jawabanBenar: 'Mulia/baik',
+    bgColor: 'bg-teal-100',
+  },
+  {
+    id: 100,
+    emoji: '📖',
+    pertanyaan: 'Kisah Nabi Yusuf diabadikan Allah secara lengkap dalam Al-Qur\'an pada surah yang bernama...',
+    pilihan: ['Surah Al-Baqarah', 'Surah Yusuf', 'Surah Yasin', 'Surah Al-Fatihah'],
+    jawabanBenar: 'Surah Yusuf',
+    bgColor: 'bg-cyan-100',
+  },
+];
+
+// Gabungan seluruh bank soal (50 dasar + 50 lanjutan = 100)
+export const BANK_SOAL: Soal[] = [...BANK_SOAL_DASAR, ...BANK_SOAL_LANJUTAN];
