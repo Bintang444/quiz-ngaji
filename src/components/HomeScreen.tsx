@@ -80,25 +80,37 @@ export default function HomeScreen({ onPilihMode }: Props) {
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">Materi Hari Ini</span>
             </h3>
             <p className="text-sm text-slate-500 font-bold text-center mb-4">Disesuaikan sama cerita yang baru dibacakan</p>
-            <div className="grid grid-cols-2 gap-2 mb-5">
-              {MATERI_DEFINITIONS.map((m) => {
-                const total = m.id === 'semua' ? 100 : jumlahMateri(m.id);
-                const aktif = materiTerpilih === m.id;
-                return (
-                  <button
-                    key={m.id}
-                    onClick={() => setMateriTerpilih(m.id)}
-                    className={`px-3 py-2.5 rounded-2xl border-2 font-black text-sm md:text-base transition-all ${
-                      aktif
-                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-blue-500 shadow-lg'
-                        : 'bg-white border-slate-200 text-slate-700 hover:border-blue-300'
-                    }`}
-                  >
-                    {m.label}
-                    <span className={`block text-[10px] md:text-xs font-bold ${aktif ? 'text-blue-100' : 'text-slate-400'}`}>{total} soal</span>
-                  </button>
-                );
-              })}
+            <div className="mb-5">
+              <button
+                onClick={() => setMateriTerpilih('semua')}
+                className={`w-full py-3 md:py-4 rounded-2xl border-2 font-black text-base md:text-lg transition-all mb-3 ${
+                  materiTerpilih === 'semua'
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-blue-500 shadow-lg'
+                    : 'bg-white border-slate-200 text-slate-700 hover:border-blue-300'
+                }`}
+              >
+                🎲 Semua Materi (Random) — 100 soal
+              </button>
+              <div className="grid grid-cols-2 gap-2">
+                {MATERI_DEFINITIONS.filter((m) => m.id !== 'semua').map((m) => {
+                  const total = jumlahMateri(m.id);
+                  const aktif = materiTerpilih === m.id;
+                  return (
+                    <button
+                      key={m.id}
+                      onClick={() => setMateriTerpilih(m.id)}
+                      className={`px-3 py-2.5 rounded-2xl border-2 font-black text-sm md:text-base transition-all ${
+                        aktif
+                          ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-blue-500 shadow-lg'
+                          : 'bg-white border-slate-200 text-slate-700 hover:border-blue-300'
+                      }`}
+                    >
+                      {m.label}
+                      <span className={`block text-[10px] md:text-xs font-bold ${aktif ? 'text-blue-100' : 'text-slate-400'}`}>{total} soal</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
             <h3 className="text-base md:text-lg font-black mb-3 text-center text-slate-600">Berapa Soalnya?</h3>
             <div className="grid grid-cols-5 gap-2">

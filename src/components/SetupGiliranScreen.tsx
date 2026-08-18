@@ -24,9 +24,20 @@ export default function SetupGiliranScreen({ daftarAnak, inputNama, setInputNama
 
         <div className="mb-5 relative z-10">
           <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Materi hari ini:</h3>
+          <button
+            type="button"
+            onClick={() => setMateri('semua')}
+            className={`w-full mb-2 py-2.5 rounded-xl border-2 font-black text-xs md:text-sm transition-all ${
+              materi === 'semua'
+                ? 'bg-gradient-to-r from-orange-500 to-rose-500 text-white border-orange-400 shadow'
+                : 'bg-white border-slate-200 text-slate-600 hover:border-orange-300'
+            }`}
+          >
+            🎲 Semua Materi (Random) — 100 soal
+          </button>
           <div className="grid grid-cols-3 gap-1.5">
-            {MATERI_DEFINITIONS.map((m) => {
-              const total = m.id === 'semua' ? 100 : jumlahMateri(m.id);
+            {MATERI_DEFINITIONS.filter((m) => m.id !== 'semua').map((m) => {
+              const total = jumlahMateri(m.id);
               const aktif = materi === m.id;
               return (
                 <button
@@ -40,7 +51,7 @@ export default function SetupGiliranScreen({ daftarAnak, inputNama, setInputNama
                   }`}
                 >
                   {m.label}
-                  <span className={`block text-[9px] md:text-[10px] font-bold ${aktif ? 'text-orange-100' : 'text-slate-400'}`}>{total} soal</span>
+                  <span className={`block text-[9px] md:text-[10px] font-bold ${aktif ? 'text-orange-100' : 'text-slate-400'}`}>{total}</span>
                 </button>
               );
             })}
