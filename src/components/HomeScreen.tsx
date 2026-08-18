@@ -1,11 +1,28 @@
-import { PartyPopper, UserPlus, Users } from 'lucide-react';
+import { useState } from 'react';
+import { PartyPopper, QrCode, UserPlus, Users } from 'lucide-react';
 import type { Mode } from '../types';
+import { PAKET_SOAL } from '../data/soal';
 
 interface Props {
   onPilihMode: (mode: Mode) => void;
+  onPilihKode: (kode: string) => boolean;
 }
 
-export default function HomeScreen({ onPilihMode }: Props) {
+export default function HomeScreen({ onPilihMode, onPilihKode }: Props) {
+  const [kodeInput, setKodeInput] = useState('');
+  const [kodeError, setKodeError] = useState(false);
+
+  const submitKode = (e: React.FormEvent) => {
+    e.preventDefault();
+    const kode = kodeInput.trim().toUpperCase();
+    if (PAKET_SOAL[kode]) {
+      setKodeError(false);
+      onPilihKode(kode);
+    } else {
+      setKodeError(true);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center z-10 relative">
       <div className="bg-white/95 backdrop-blur-sm p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] shadow-2xl max-w-lg w-full border-[8px] md:border-[10px] border-blue-400">
@@ -41,6 +58,34 @@ export default function HomeScreen({ onPilihMode }: Props) {
               </div>
             </div>
           </button>
+        </div>
+
+        <div className="mt-6 md:mt-10 pt-5 md:pt-7 border-t-4 border-dashed border-blue-200">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <QrCode className="w-5 h-5 text-blue-500" />
+            <p className="text-sm md:text-base text-gray-500 font-bold uppercase tracking-widest">Main Pakai Kode</p>
+          </div>
+          <form onSubmit={submitKode} className="flex flex-col sm:flex-row gap-2 md:gap-3">
+            <input
+              type="text"
+              value={kodeInput}
+              onChange={(e) => {
+                setKodeInput(e.target.value);
+                setKodeError(false);
+              }}
+              placeholder="Ketik kode QR (mis. SET-A)"
+              className={`flex-1 px-4 py-3 md:py-4 text-center font-black text-lg md:text-xl tracking-widest uppercase bg-white rounded-2xl border-4 outline-none focus:border-blue-400 transition-colors placeholder:font-medium placeholder:tracking-normal placeholder:text-gray-300 placeholder:normal-case ${
+                kodeError ? 'border-rose-300 bg-rose-50' : 'border-slate-200'
+              }`}
+            />
+            <button
+              type="submit"
+              className="px-5 md:px-6 py-3 md:py-4 bg-blue-500 text-white font-black text-lg md:text-xl rounded-2xl hover:bg-blue-600 shadow-[0_5px_0_rgb(29,78,216)] active:shadow-[0_0px_0_rgb(29,78,216)] active:translate-y-1 transition-all"
+            >
+              Mulai
+            </button>
+          </form>
+          {kodeError && <p className="mt-2 text-sm font-bold text-rose-500">Kode gak ketemu. Cek lagi ya!</p>}
         </div>
       </div>
     </div>

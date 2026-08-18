@@ -5,12 +5,14 @@ import GambarSoal from './GambarSoal';
 import { pustakaAudio } from '../utils/audio';
 
 interface Props {
-  mode: 'giliran' | 'rame-rame' | null;
+  mode: 'giliran' | 'rame-rame' | 'kode' | null;
+  kode: string | null;
   soalSekarang: Soal;
   anakTerpilih: string;
   daftarAnak: string[];
   anakBelumMaju: string[];
   soalTerjawab: number;
+  totalSoal: number;
   skorKolektif: number;
   skorIndividu: Record<string, number>;
   jawabanDipilih: string | null;
@@ -23,11 +25,13 @@ interface Props {
 
 export default function PlayingScreen({
   mode,
+  kode,
   soalSekarang,
   anakTerpilih,
   daftarAnak,
   anakBelumMaju,
   soalTerjawab,
+  totalSoal,
   skorKolektif,
   skorIndividu,
   jawabanDipilih,
@@ -37,9 +41,10 @@ export default function PlayingScreen({
   lanjutSoal,
   resetGame,
 }: Props) {
-  const namaGiliran = mode === 'giliran' ? anakTerpilih : 'Satu Kelas!';
-  const totalProgress = mode === 'giliran' ? daftarAnak.length : 7;
+  const namaGiliran = mode === 'giliran' ? anakTerpilih : mode === 'kode' ? `Paket ${kode}` : 'Satu Kelas!';
+  const totalProgress = mode === 'giliran' ? daftarAnak.length : totalSoal;
   const currentProgress = mode === 'giliran' ? daftarAnak.length - anakBelumMaju.length : soalTerjawab + 1;
+  const labelSkor = mode === 'giliran' ? 'Giliran:' : mode === 'kode' ? 'Skor:' : 'Skor Kelas:';
 
   useEffect(() => {
     if (jawabanDipilih !== null) {
@@ -68,7 +73,7 @@ export default function PlayingScreen({
           </div>
         </div>
         <div className="flex-1 text-right ml-3 md:ml-4 border-l-4 pl-3 md:pl-4 border-slate-100">
-          <p className="text-[10px] md:text-xs text-slate-400 font-black uppercase tracking-widest mb-1">{mode === 'giliran' ? 'Giliran:' : 'Skor Kelas:'}</p>
+          <p className="text-[10px] md:text-xs text-slate-400 font-black uppercase tracking-widest mb-1">{labelSkor}</p>
           <p className={`text-lg md:text-2xl font-black truncate leading-none ${mode === 'giliran' ? 'text-orange-600' : 'text-purple-600'}`}>{namaGiliran}</p>
           {mode === 'giliran' ? (
             <span className="mt-1 md:mt-2 text-xs md:text-sm bg-yellow-100 text-yellow-700 px-2 md:px-3 py-1 rounded-xl font-black border-2 border-yellow-200">{skorIndividu[namaGiliran] || 0} BINTANG</span>

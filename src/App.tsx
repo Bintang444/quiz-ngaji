@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Music, VolumeX } from 'lucide-react';
 import { useKuis } from './hooks/useKuis';
 import { pustakaAudio } from './utils/audio';
+import { PAKET_SOAL } from './data/soal';
 import HomeScreen from './components/HomeScreen';
 import SetupGiliranScreen from './components/SetupGiliranScreen';
 import GachaScreen from './components/GachaScreen';
@@ -9,7 +10,9 @@ import PlayingScreen from './components/PlayingScreen';
 import ResultScreen from './components/ResultScreen';
 
 export default function App() {
-  const kuis = useKuis();
+  const kodeUrl = new URLSearchParams(window.location.search).get('kode') ?? undefined;
+  const kodeAwal = kodeUrl && PAKET_SOAL[kodeUrl] ? kodeUrl : undefined;
+  const kuis = useKuis(kodeAwal);
   const [musikOn, setMusikOn] = useState(true);
 
   useEffect(() => {
@@ -39,7 +42,7 @@ export default function App() {
       </button>
 
       <div className="relative z-10 w-full h-screen overflow-y-auto overflow-x-hidden scroll-smooth">
-        {kuis.gameState === 'home' && <HomeScreen onPilihMode={kuis.handlePilihMode} />}
+        {kuis.gameState === 'home' && <HomeScreen onPilihMode={kuis.handlePilihMode} onPilihKode={kuis.pilihKode} />}
         {kuis.gameState === 'setup' && (
           <SetupGiliranScreen
             daftarAnak={kuis.daftarAnak}
@@ -62,11 +65,13 @@ export default function App() {
         {kuis.gameState === 'playing' && kuis.soalSekarang && (
           <PlayingScreen
             mode={kuis.mode}
+            kode={kuis.kode}
             soalSekarang={kuis.soalSekarang}
             anakTerpilih={kuis.anakTerpilih}
             daftarAnak={kuis.daftarAnak}
             anakBelumMaju={kuis.anakBelumMaju}
             soalTerjawab={kuis.soalTerjawab}
+            totalSoal={kuis.totalSoal}
             skorKolektif={kuis.skorKolektif}
             skorIndividu={kuis.skorIndividu}
             jawabanDipilih={kuis.jawabanDipilih}
@@ -80,6 +85,7 @@ export default function App() {
         {kuis.gameState === 'result' && (
           <ResultScreen
             mode={kuis.mode}
+            kode={kuis.kode}
             skorIndividu={kuis.skorIndividu}
             skorKolektif={kuis.skorKolektif}
             resetGame={kuis.resetGame}

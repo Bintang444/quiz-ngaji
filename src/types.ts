@@ -1,4 +1,4 @@
-export type Mode = 'giliran' | 'rame-rame';
+export type Mode = 'giliran' | 'rame-rame' | 'kode';
 
 export type GameState = 'home' | 'setup' | 'gacha' | 'playing' | 'result';
 
