@@ -1,22 +1,51 @@
 import { Dices, UserPlus } from 'lucide-react';
+import { MATERI_DEFINITIONS, jumlahMateri } from '../data/materi';
+import type { Materi } from '../data/materi';
 
 interface Props {
   daftarAnak: string[];
   inputNama: string;
   setInputNama: (v: string) => void;
+  materi: Materi;
+  setMateri: (m: Materi) => void;
   tambahAnak: (e: React.FormEvent) => void;
   mulaiGiliran: () => void;
   resetGame: () => void;
 }
 
-export default function SetupGiliranScreen({ daftarAnak, inputNama, setInputNama, tambahAnak, mulaiGiliran, resetGame }: Props) {
+export default function SetupGiliranScreen({ daftarAnak, inputNama, setInputNama, materi, setMateri, tambahAnak, mulaiGiliran, resetGame }: Props) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 relative z-10">
       <div className="bg-white/95 p-6 md:p-9 rounded-[2rem] shadow-2xl w-full max-w-md border border-white/60 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-28 bg-gradient-to-b from-orange-200/50 to-transparent opacity-60" />
-        <h2 className="text-2xl md:text-3xl font-black mb-5 md:mb-7 text-center relative z-10 tracking-tight">
+        <h2 className="text-2xl md:text-3xl font-black mb-4 md:mb-6 text-center relative z-10 tracking-tight">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-rose-500">Daftar Nama</span>
         </h2>
+
+        <div className="mb-5 relative z-10">
+          <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Materi hari ini:</h3>
+          <div className="grid grid-cols-3 gap-1.5">
+            {MATERI_DEFINITIONS.map((m) => {
+              const total = m.id === 'semua' ? 100 : jumlahMateri(m.id);
+              const aktif = materi === m.id;
+              return (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => setMateri(m.id)}
+                  className={`px-2 py-1.5 rounded-xl border-2 font-black text-[11px] md:text-xs transition-all ${
+                    aktif
+                      ? 'bg-gradient-to-r from-orange-500 to-rose-500 text-white border-orange-400 shadow'
+                      : 'bg-white border-slate-200 text-slate-600 hover:border-orange-300'
+                  }`}
+                >
+                  {m.label}
+                  <span className={`block text-[9px] md:text-[10px] font-bold ${aktif ? 'text-orange-100' : 'text-slate-400'}`}>{total} soal</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
         <form onSubmit={tambahAnak} className="flex flex-col sm:flex-row gap-2 md:gap-3 mb-6 relative z-10">
           <input

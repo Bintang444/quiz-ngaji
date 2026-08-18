@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import confetti from 'canvas-confetti';
 import type { GameState, Mode, Rarity, Soal } from '../types';
 import { BANK_SOAL } from '../data/soal';
+import { soalUntukMateri } from '../data/materi';
+import type { Materi } from '../data/materi';
 import { pustakaAudio } from '../utils/audio';
 
 const JUMLAH_SOAL_DEFAULT = 7;
@@ -42,6 +44,7 @@ export function useKuis() {
   const [isBenar, setIsBenar] = useState<boolean | null>(null);
   const [feedbackAnim, setFeedbackAnim] = useState('');
   const [bintangRarity, setBintangRarity] = useState<Rarity | null>(null);
+  const [materi, setMateri] = useState<Materi>('semua');
   const [totalSoal, setTotalSoal] = useState(JUMLAH_SOAL_DEFAULT);
   const autoTimer = useRef<number | null>(null);
 
@@ -55,7 +58,8 @@ export function useKuis() {
   }, []);
 
   const ambilSoalAcak = (sisaSoal: number[]) => {
-    const pool = sisaSoal.length === 0 ? BANK_SOAL.map((s) => s.id) : sisaSoal;
+    const poolMateri = soalUntukMateri(materi, BANK_SOAL.map((s) => s.id));
+    const pool = sisaSoal.length === 0 ? poolMateri : sisaSoal;
     const idTerpilih = pool[Math.floor(Math.random() * pool.length)];
     return {
       soal: BANK_SOAL.find((s) => s.id === idTerpilih)!,
@@ -63,17 +67,18 @@ export function useKuis() {
     };
   };
 
-  const handlePilihMode = (selectedMode: Mode, jumlahSoal: number = JUMLAH_SOAL_DEFAULT) => {
+  const handlePilihMode = (selectedMode: Mode, jumlahSoal: number = JUMLAH_SOAL_DEFAULT, materiPilihan: Materi = 'semua') => {
     setMode(selectedMode);
-    const semuaIdSoal = BANK_SOAL.map((s) => s.id);
-    setSoalTersedia(semuaIdSoal);
+    setMateri(materiPilihan);
 
     if (selectedMode === 'giliran') {
       setGameState('setup');
       setDaftarAnak([]);
     } else {
-      setTotalSoal(Math.min(Math.max(jumlahSoal, 1), BANK_SOAL.length));
-      const { soal, sisaBaru } = ambilSoalAcak(semuaIdSoal);
+      const poolMateri = soalUntukMateri(materiPilihan, BANK_SOAL.map((s) => s.id));
+      setTotalSoal(Math.min(Math.max(jumlahSoal, 1), poolMateri.length));
+      setSoalTersedia(poolMateri);
+      const { soal, sisaBaru } = ambilSoalAcak(poolMateri);
       setSoalSekarang(soal);
       setSoalTersedia(sisaBaru);
       setGameState('playing');
@@ -94,6 +99,7 @@ export function useKuis() {
   const mulaiGiliran = () => {
     if (daftarAnak.length > 0) {
       setAnakBelumMaju(acakDaftar(daftarAnak));
+      setSoalTersedia(soalUntukMateri(materi, BANK_SOAL.map((s) => s.id)));
       setSoalTerjawab(0);
       setGameState('gacha');
       setGachaNameDisplay('???');
@@ -205,6 +211,7 @@ export function useKuis() {
     setAnakBelumMaju([]);
     setJawabanDipilih(null);
     setBintangRarity(null);
+    setMateri('semua');
   };
 
   return {
@@ -216,6 +223,8 @@ export function useKuis() {
     anakBelumMaju,
     anakTerpilih,
     skorKolektif,
+    materi,
+    setMateri,
     soalSekarang,
     soalTerjawab,
     totalSoal,

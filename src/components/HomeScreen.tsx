@@ -1,19 +1,22 @@
 import { useState } from 'react';
 import { PartyPopper, UserPlus, Users, X } from 'lucide-react';
 import type { Mode } from '../types';
+import { MATERI_DEFINITIONS, jumlahMateri } from '../data/materi';
+import type { Materi } from '../data/materi';
 
 interface Props {
-  onPilihMode: (mode: Mode, jumlahSoal?: number) => void;
+  onPilihMode: (mode: Mode, jumlahSoal?: number, materi?: Materi) => void;
 }
 
-const PILIHAN_SOAL = [5, 7, 10, 15, 20, 25];
+const PILIHAN_SOAL = [5, 7, 10, 15, 20];
 
 export default function HomeScreen({ onPilihMode }: Props) {
-  const [showSoalCount, setShowSoalCount] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [materiTerpilih, setMateriTerpilih] = useState<Materi>('semua');
 
   const pilihJumlahSoal = (n: number) => {
-    setShowSoalCount(false);
-    onPilihMode('rame-rame', n);
+    setShowModal(false);
+    onPilihMode('rame-rame', n, materiTerpilih);
   };
 
   return (
@@ -51,7 +54,7 @@ export default function HomeScreen({ onPilihMode }: Props) {
             </button>
 
             <button
-              onClick={() => setShowSoalCount(true)}
+              onClick={() => { setMateriTerpilih('semua'); setShowModal(true); }}
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-black text-base md:text-lg py-4 md:py-5 px-4 rounded-2xl transition-all duration-300 flex items-center gap-3 shadow-[0_10px_20px_rgba(59,130,246,0.35)] hover:-translate-y-1 active:translate-y-0 active:scale-95 group"
             >
               <Users className="w-7 h-7 md:w-8 md:h-8 text-blue-100 shrink-0 group-hover:scale-110 transition-transform" strokeWidth={2.5} />
@@ -64,31 +67,52 @@ export default function HomeScreen({ onPilihMode }: Props) {
         </div>
       </div>
 
-      {showSoalCount && (
-        <div className="fixed inset-0 z-[60] bg-slate-900/60 flex items-center justify-center p-6">
-          <div className="bg-white/95 rounded-[2rem] shadow-2xl border border-white/60 w-full max-w-sm p-6 md:p-8 relative animate-fade-in">
+      {showModal && (
+        <div className="fixed inset-0 z-[60] bg-slate-900/60 flex items-center justify-center p-6 overflow-y-auto">
+          <div className="bg-white/95 rounded-[2rem] shadow-2xl border border-white/60 w-full max-w-md p-6 md:p-8 relative animate-fade-in my-8">
             <button
-              onClick={() => setShowSoalCount(false)}
+              onClick={() => setShowModal(false)}
               className="absolute top-4 right-4 p-2 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors"
             >
               <X className="w-5 h-5 text-slate-600" />
             </button>
             <h3 className="text-xl md:text-2xl font-black mb-1 text-center">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">Berapa Soalnya?</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">Materi Hari Ini</span>
             </h3>
-            <p className="text-sm text-slate-500 font-bold text-center mb-5">Dijawab bareng-bareng satu kelas</p>
-            <div className="grid grid-cols-2 gap-3">
+            <p className="text-sm text-slate-500 font-bold text-center mb-4">Disesuaikan sama cerita yang baru dibacakan</p>
+            <div className="grid grid-cols-2 gap-2 mb-5">
+              {MATERI_DEFINITIONS.map((m) => {
+                const total = m.id === 'semua' ? 100 : jumlahMateri(m.id);
+                const aktif = materiTerpilih === m.id;
+                return (
+                  <button
+                    key={m.id}
+                    onClick={() => setMateriTerpilih(m.id)}
+                    className={`px-3 py-2.5 rounded-2xl border-2 font-black text-sm md:text-base transition-all ${
+                      aktif
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-blue-500 shadow-lg'
+                        : 'bg-white border-slate-200 text-slate-700 hover:border-blue-300'
+                    }`}
+                  >
+                    {m.label}
+                    <span className={`block text-[10px] md:text-xs font-bold ${aktif ? 'text-blue-100' : 'text-slate-400'}`}>{total} soal</span>
+                  </button>
+                );
+              })}
+            </div>
+            <h3 className="text-base md:text-lg font-black mb-3 text-center text-slate-600">Berapa Soalnya?</h3>
+            <div className="grid grid-cols-5 gap-2">
               {PILIHAN_SOAL.map((n) => (
                 <button
                   key={n}
                   onClick={() => pilihJumlahSoal(n)}
-                  className="py-5 bg-gradient-to-b from-blue-50 to-indigo-100 border-2 border-blue-200 text-blue-700 font-black text-2xl md:text-3xl rounded-2xl hover:border-blue-400 hover:from-blue-100 hover:to-indigo-200 hover:-translate-y-1 active:translate-y-0 transition-all shadow-md"
+                  className="py-3 bg-gradient-to-b from-blue-50 to-indigo-100 border-2 border-blue-200 text-blue-700 font-black text-xl md:text-2xl rounded-2xl hover:border-blue-400 hover:from-blue-100 hover:to-indigo-200 hover:-translate-y-1 active:translate-y-0 transition-all shadow-md"
                 >
                   {n}
                 </button>
               ))}
             </div>
-            <button onClick={() => setShowSoalCount(false)} className="mt-5 w-full text-slate-400 font-bold py-2 text-sm hover:text-slate-600">
+            <button onClick={() => setShowModal(false)} className="mt-5 w-full text-slate-400 font-bold py-2 text-sm hover:text-slate-600">
               Batal
             </button>
           </div>

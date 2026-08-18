@@ -46,6 +46,8 @@ export default function App() {
             daftarAnak={kuis.daftarAnak}
             inputNama={kuis.inputNama}
             setInputNama={kuis.setInputNama}
+            materi={kuis.materi}
+            setMateri={kuis.setMateri}
             tambahAnak={kuis.tambahAnak}
             mulaiGiliran={kuis.mulaiGiliran}
             resetGame={kuis.resetGame}
