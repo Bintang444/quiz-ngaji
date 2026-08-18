@@ -4,12 +4,12 @@ import { Star, Trophy } from 'lucide-react';
 
 interface Props {
   mode: 'giliran' | 'rame-rame' | null;
-  skorIndividu: Record<string, number>;
+  daftarAnak: string[];
   skorKolektif: number;
   resetGame: () => void;
 }
 
-export default function ResultScreen({ mode, skorIndividu, skorKolektif, resetGame }: Props) {
+export default function ResultScreen({ mode, daftarAnak, skorKolektif, resetGame }: Props) {
   useEffect(() => {
     confetti({
       particleCount: 120,
@@ -35,32 +35,31 @@ export default function ResultScreen({ mode, skorIndividu, skorKolektif, resetGa
         </h1>
         <p className="text-lg md:text-2xl text-slate-500 mb-6 md:mb-10 font-bold">Kalian semua hebat hari ini!</p>
 
-        {mode === 'giliran' ? (
-          <div className="space-y-3 md:space-y-4 mb-8 md:mb-10 relative z-10">
-            <h3 className="text-lg md:text-2xl font-black text-slate-700 bg-white py-2 md:py-3 rounded-full mb-5 md:mb-7 border-4 border-purple-100">Bintang Terkumpul</h3>
-            <div className="grid grid-cols-2 gap-3 md:gap-5 text-left">
-              {Object.entries(skorIndividu).map(([nama, skor], idx) => (
-                <div key={idx} className="bg-white p-3 md:p-4 rounded-2xl border border-purple-200 flex justify-between items-center shadow-md">
-                  <span className="font-black text-base md:text-xl text-slate-800 truncate mr-2 md:mr-3">{nama}</span>
-                  <div className="flex items-center text-amber-600 font-black text-xl md:text-2xl bg-amber-50 px-3 md:px-4 py-1.5 rounded-xl shadow-inner border border-amber-100">{skor}</div>
-                </div>
+        {mode === 'giliran' && daftarAnak.length > 0 && (
+          <div className="mb-6 md:mb-8 relative z-10">
+            <h3 className="text-sm md:text-base font-black text-slate-500 mb-3 uppercase tracking-widest">Keren, yang ikut main hari ini:</h3>
+            <div className="flex flex-wrap justify-center gap-2">
+              {daftarAnak.map((nama, idx) => (
+                <span key={idx} className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-3 py-1.5 rounded-xl font-black text-sm md:text-base shadow-md border border-blue-300 animate-fade-in">
+                  {nama}
+                </span>
               ))}
             </div>
           </div>
-        ) : (
-          <div className="mb-8 md:mb-10 relative z-10">
-            <div className="relative bg-gradient-to-b from-purple-50 to-indigo-100 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl border-4 border-purple-300 py-6 md:py-8 px-4">
-              <div className="h-8 bg-gradient-to-r from-purple-400 to-fuchsia-400 flex justify-center px-4 items-center relative z-10 mb-4 rounded-t-md">
-                <span className="text-white font-black text-[10px] tracking-widest uppercase drop-shadow">Bintang Kelas Kita</span>
-              </div>
-              <div className="text-6xl md:text-8xl font-black text-slate-800 flex items-center justify-center gap-4 md:gap-6 drop-shadow-sm relative z-10">
-                {skorKolektif}
-                <Star className="w-14 h-14 md:w-20 md:h-20 text-amber-400 animate-bounce" strokeWidth={1.5} fill="currentColor" />
-              </div>
-              <p className="text-xl md:text-2xl text-purple-700 mt-5 md:mt-6 font-black relative z-10">Kelas yang luar biasa!</p>
-            </div>
-          </div>
         )}
+
+        <div className="mb-8 md:mb-10 relative z-10">
+          <div className="relative bg-gradient-to-b from-purple-50 to-indigo-100 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl border-4 border-purple-300 py-6 md:py-8 px-4">
+            <div className="h-8 bg-gradient-to-r from-purple-400 to-fuchsia-400 flex justify-center px-4 items-center relative z-10 mb-4 rounded-t-md">
+              <span className="text-white font-black text-[10px] tracking-widest uppercase drop-shadow">Bintang Kelas Kita</span>
+            </div>
+            <div className="text-6xl md:text-8xl font-black text-slate-800 flex items-center justify-center gap-4 md:gap-6 drop-shadow-sm relative z-10">
+              {skorKolektif}
+              <Star className="w-14 h-14 md:w-20 md:h-20 text-amber-400 animate-bounce" strokeWidth={1.5} fill="currentColor" />
+            </div>
+            <p className="text-xl md:text-2xl text-purple-700 mt-5 md:mt-6 font-black relative z-10">Kelas yang luar biasa!</p>
+          </div>
+        </div>
 
         <button
           onClick={resetGame}

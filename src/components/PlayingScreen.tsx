@@ -14,7 +14,6 @@ interface Props {
   soalTerjawab: number;
   totalSoal: number;
   skorKolektif: number;
-  skorIndividu: Record<string, number>;
   jawabanDipilih: string | null;
   isBenar: boolean | null;
   feedbackAnim: string;
@@ -32,7 +31,6 @@ export default function PlayingScreen({
   soalTerjawab,
   totalSoal,
   skorKolektif,
-  skorIndividu,
   jawabanDipilih,
   isBenar,
   feedbackAnim,
@@ -82,14 +80,10 @@ export default function PlayingScreen({
         <div className="flex-1 text-right ml-3 md:ml-4 border-l-4 pl-3 md:pl-4 border-slate-200">
           <p className="text-[10px] md:text-xs text-slate-500 font-black uppercase tracking-widest mb-1">{labelSkor}</p>
           <p className={`text-lg md:text-2xl font-black truncate leading-none ${warnaGiliran ? 'text-orange-600' : 'text-purple-600'}`}>{namaGiliran}</p>
-          {mode === 'giliran' ? (
-            <span className="mt-1 md:mt-2 text-xs md:text-sm bg-yellow-100 text-yellow-700 px-2 md:px-3 py-1 rounded-xl font-black border-2 border-yellow-200">{skorIndividu[namaGiliran] || 0} BINTANG</span>
-          ) : (
-            <span className="mt-1 md:mt-2 text-xl md:text-2xl font-black text-amber-500 drop-shadow-sm flex items-center gap-1 justify-end">
-              {skorKolektif}
-              <Star className="w-5 h-5 md:w-7 md:h-7" fill="currentColor" strokeWidth={1.5} />
-            </span>
-          )}
+          <span className="mt-1 md:mt-2 text-xl md:text-2xl font-black text-amber-500 drop-shadow-sm flex items-center gap-1 justify-end">
+            {skorKolektif}
+            <Star className="w-5 h-5 md:w-7 md:h-7" fill="currentColor" strokeWidth={1.5} />
+          </span>
         </div>
       </div>
 

@@ -13,7 +13,6 @@ export function useKuis() {
   const [inputNama, setInputNama] = useState('');
   const [anakBelumMaju, setAnakBelumMaju] = useState<string[]>([]);
   const [anakTerpilih, setAnakTerpilih] = useState('');
-  const [skorIndividu, setSkorIndividu] = useState<Record<string, number>>({});
   const [gachaNameDisplay, setGachaNameDisplay] = useState('???');
   const [isSpinning, setIsSpinning] = useState(false);
   const [hasSpun, setHasSpun] = useState(false);
@@ -54,7 +53,6 @@ export function useKuis() {
     if (selectedMode === 'giliran') {
       setGameState('setup');
       setDaftarAnak([]);
-      setSkorIndividu({});
     } else {
       setTotalSoal(Math.min(Math.max(jumlahSoal, 1), BANK_SOAL.length));
       const { soal, sisaBaru } = ambilSoalAcak(semuaIdSoal);
@@ -71,7 +69,6 @@ export function useKuis() {
     const nama = inputNama.trim();
     if (nama !== '') {
       setDaftarAnak([...daftarAnak, nama]);
-      setSkorIndividu((prev) => ({ ...prev, [nama]: 0 }));
       setInputNama('');
     }
   };
@@ -125,11 +122,7 @@ export function useKuis() {
     setFeedbackAnim(benar ? 'animate-bounce text-emerald-500 scale-110' : 'animate-shake text-rose-500');
 
     if (benar) {
-      if (mode === 'giliran') {
-        setSkorIndividu((prev) => ({ ...prev, [anakTerpilih]: (prev[anakTerpilih] || 0) + 1 }));
-      } else {
-        setSkorKolektif((prev) => prev + 1);
-      }
+      setSkorKolektif((prev) => prev + 1);
       autoTimer.current = window.setTimeout(() => {
         lanjutkanGame();
       }, 2000);
@@ -173,7 +166,6 @@ export function useKuis() {
     setGameState('home');
     setMode(null);
     setDaftarAnak([]);
-    setSkorIndividu({});
     setAnakBelumMaju([]);
     setJawabanDipilih(null);
   };
@@ -186,7 +178,6 @@ export function useKuis() {
     setInputNama,
     anakBelumMaju,
     anakTerpilih,
-    skorIndividu,
     skorKolektif,
     soalSekarang,
     soalTerjawab,
