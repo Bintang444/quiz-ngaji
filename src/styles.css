@@ -25,4 +25,104 @@
 .animate-spin-slow { animation: spinSlow 8s linear infinite; }
 .animate-bounce-slow { animation: bounceSlow 2s infinite; }
 
-body { margin: 0; background-color: #f8fafc; }
+body { margin: 0; background-color: #dbeafe; }
+
+/* ===== TCG / IMPHNEN Style ===== */
+
+/* Grid Pattern Background */
+.bg-grid-pattern {
+  background-size: 30px 30px;
+  background-image:
+    linear-gradient(to right, rgba(99, 102, 241, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.08) 1px, transparent 1px);
+}
+
+/* Holo Foil Overlay */
+.holo-foil {
+  position: absolute; inset: 0; z-index: 40; pointer-events: none; opacity: 0;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.8) 40%, rgba(255, 255, 255, 0.2) 45%, transparent 60%);
+  background-size: 200% 200%; background-position: -100% 0; mix-blend-mode: color-dodge;
+  border-radius: inherit;
+}
+.shine-effect .holo-foil { animation: shimmer 2.5s ease-in-out infinite; opacity: 1; }
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Gacha Shaking Extreme */
+@keyframes pullShakeExtreme {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1.03); }
+  20% { transform: translate(-4px, 4px) rotate(-1deg) scale(1.03); }
+  40% { transform: translate(4px, -4px) rotate(1deg) scale(1.03); }
+  60% { transform: translate(-4px, -4px) rotate(-1deg) scale(1.03); }
+  80% { transform: translate(4px, 4px) rotate(1deg) scale(1.03); }
+}
+.anim-rolling {
+  animation: pullShakeExtreme 0.1s infinite;
+  filter: brightness(1.2);
+}
+
+/* Epic Aura Glow */
+.epic-aura {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 150%; height: 150%; border-radius: 50%; z-index: 10;
+  opacity: 0; transition: opacity 0.5s ease; pointer-events: none; filter: blur(40px);
+}
+.aura-ur { background: radial-gradient(circle, rgba(250, 204, 21, 0.8) 0%, transparent 70%); opacity: 1; animation: pulseAura 2s infinite; }
+.aura-sr { background: radial-gradient(circle, rgba(168, 85, 247, 0.8) 0%, transparent 70%); opacity: 1; animation: pulseAura 2s infinite; }
+.aura-r { background: radial-gradient(circle, rgba(34, 211, 238, 0.8) 0%, transparent 70%); opacity: 1; animation: pulseAura 2s infinite; }
+.aura-c { background: radial-gradient(circle, rgba(148, 163, 184, 0.6) 0%, transparent 70%); opacity: 1; animation: pulseAura 2s infinite; }
+
+@keyframes pulseAura {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+}
+
+/* Flashbang Effect */
+#flashBang {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: white; z-index: 9999; opacity: 0; pointer-events: none;
+  transition: opacity 0.2s ease-out;
+}
+.is-flashing { opacity: 1 !important; }
+
+/* Pop Up Animation */
+@keyframes popUp {
+  0% { opacity: 0; transform: translateY(20px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.anim-pop-up { animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+/* TCG Rarity Theme Colors */
+.bg-ur { background: linear-gradient(135deg, #ffdf00, #d4af37, #b8860b); }
+.bg-sr { background: linear-gradient(135deg, #ff00ff, #8a2be2, #4b0082); }
+.bg-r { background: linear-gradient(135deg, #00ffff, #1e90ff, #00008b); }
+.bg-c { background: linear-gradient(135deg, #e2e8f0, #94a3b8, #475569); }
+.bg-mythic { background: linear-gradient(135deg, #ff0000, #800000, #000000); }
+
+.text-ur { color: #b45309; }
+.text-sr { color: #a855f7; }
+.text-r { color: #0891b2; }
+.text-c { color: #64748b; }
+
+/* Card Flip */
+.card-flip {
+  perspective: 1500px;
+}
+.card-flip-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+.card-flip-inner.is-flipped { transform: rotateY(180deg); }
+.card-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+.card-back-face { transform: rotateY(180deg); }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { GameState, Mode, Soal } from '../types';
 import { BANK_SOAL, PAKET_SOAL, SEMUA_SOAL } from '../data/soal';
 import { pustakaAudio } from '../utils/audio';
@@ -40,6 +40,16 @@ export function useKuis(kodeAwal?: string) {
   const [isBenar, setIsBenar] = useState<boolean | null>(null);
   const [feedbackAnim, setFeedbackAnim] = useState('');
   const [totalSoal, setTotalSoal] = useState(kodeAwal ? PAKET_SOAL[kodeAwal]?.length ?? JUMLAH_SOAL_RAME : JUMLAH_SOAL_RAME);
+  const autoTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (autoTimer.current !== null) {
+        clearTimeout(autoTimer.current);
+        autoTimer.current = null;
+      }
+    };
+  }, []);
 
   const ambilSoalAcak = (sisaSoal: number[]) => {
     const pool = sisaSoal.length === 0 ? SEMUA_SOAL.map((s) => s.id) : sisaSoal;
@@ -154,13 +164,17 @@ export function useKuis(kodeAwal?: string) {
       } else {
         setSkorKolektif((prev) => prev + 1);
       }
-      setTimeout(() => {
+      autoTimer.current = window.setTimeout(() => {
         lanjutkanGame();
       }, 2000);
     }
   };
 
   const lanjutkanGame = () => {
+    if (autoTimer.current !== null) {
+      clearTimeout(autoTimer.current);
+      autoTimer.current = null;
+    }
     setJawabanDipilih(null);
     setIsBenar(null);
     setFeedbackAnim('');
@@ -186,6 +200,10 @@ export function useKuis(kodeAwal?: string) {
   };
 
   const resetGame = () => {
+    if (autoTimer.current !== null) {
+      clearTimeout(autoTimer.current);
+      autoTimer.current = null;
+    }
     if (mode === 'kode' && kode) {
       const paket = PAKET_SOAL[kode];
       if (paket) {

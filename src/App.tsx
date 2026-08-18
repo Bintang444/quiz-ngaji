@@ -23,11 +23,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 font-sans text-slate-800 overflow-hidden relative selection:bg-blue-200">
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-yellow-300/20 rounded-full mix-blend-multiply blur-[80px] animate-pulse" />
-        <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] bg-sky-300/20 rounded-full mix-blend-multiply blur-[80px] animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vw] bg-pink-300/20 rounded-full mix-blend-multiply blur-[80px] animate-pulse" style={{ animationDelay: '4s' }} />
+    <div className="min-h-screen bg-gradient-to-br from-sky-200 via-indigo-100 to-fuchsia-200 font-sans text-slate-800 overflow-hidden relative selection:bg-blue-200">
+      <div id="flashBang" />
+      <div className="fixed inset-0 pointer-events-none z-0 bg-grid-pattern">
+        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-sky-300/50 rounded-full mix-blend-multiply blur-[80px] animate-pulse" />
+        <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] bg-purple-300/50 rounded-full mix-blend-multiply blur-[80px] animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vw] bg-pink-300/50 rounded-full mix-blend-multiply blur-[80px] animate-pulse" style={{ animationDelay: '4s' }} />
       </div>
 
       <button
@@ -57,6 +58,7 @@ export default function App() {
             hasSpun={kuis.hasSpun}
             putarGacha={kuis.putarGacha}
             masukKeSoalGiliran={kuis.masukKeSoalGiliran}
+            resetGame={kuis.resetGame}
           />
         )}
         {kuis.gameState === 'playing' && kuis.soalSekarang && (
