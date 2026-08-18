@@ -64,7 +64,6 @@ export default function App() {
         {kuis.gameState === 'playing' && kuis.soalSekarang && (
           <PlayingScreen
             mode={kuis.mode}
-            kode={kuis.kode}
             soalSekarang={kuis.soalSekarang}
             anakTerpilih={kuis.anakTerpilih}
             daftarAnak={kuis.daftarAnak}
@@ -84,7 +83,6 @@ export default function App() {
         {kuis.gameState === 'result' && (
           <ResultScreen
             mode={kuis.mode}
-            kode={kuis.kode}
             skorIndividu={kuis.skorIndividu}
             skorKolektif={kuis.skorKolektif}
             resetGame={kuis.resetGame}

@@ -6,8 +6,7 @@ import GambarSoal from './GambarSoal';
 import { pustakaAudio } from '../utils/audio';
 
 interface Props {
-  mode: 'giliran' | 'rame-rame' | 'kode' | null;
-  kode: string | null;
+  mode: 'giliran' | 'rame-rame' | null;
   soalSekarang: Soal;
   anakTerpilih: string;
   daftarAnak: string[];
@@ -26,7 +25,6 @@ interface Props {
 
 export default function PlayingScreen({
   mode,
-  kode,
   soalSekarang,
   anakTerpilih,
   daftarAnak,
@@ -42,10 +40,10 @@ export default function PlayingScreen({
   lanjutSoal,
   resetGame,
 }: Props) {
-  const namaGiliran = mode === 'giliran' ? anakTerpilih : mode === 'kode' ? `Paket ${kode}` : 'Satu Kelas!';
+  const namaGiliran = mode === 'giliran' ? anakTerpilih : 'Satu Kelas!';
   const totalProgress = mode === 'giliran' ? daftarAnak.length : totalSoal;
   const currentProgress = mode === 'giliran' ? daftarAnak.length - anakBelumMaju.length : soalTerjawab + 1;
-  const labelSkor = mode === 'giliran' ? 'Giliran:' : mode === 'kode' ? 'Skor:' : 'Skor Kelas:';
+  const labelSkor = mode === 'giliran' ? 'Giliran:' : 'Skor Kelas:';
   const warnaGiliran = mode === 'giliran';
 
   useEffect(() => {

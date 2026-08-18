@@ -3,14 +3,13 @@ import confetti from 'canvas-confetti';
 import { Star, Trophy } from 'lucide-react';
 
 interface Props {
-  mode: 'giliran' | 'rame-rame' | 'kode' | null;
-  kode: string | null;
+  mode: 'giliran' | 'rame-rame' | null;
   skorIndividu: Record<string, number>;
   skorKolektif: number;
   resetGame: () => void;
 }
 
-export default function ResultScreen({ mode, kode, skorIndividu, skorKolektif, resetGame }: Props) {
+export default function ResultScreen({ mode, skorIndividu, skorKolektif, resetGame }: Props) {
   useEffect(() => {
     confetti({
       particleCount: 120,
@@ -34,9 +33,7 @@ export default function ResultScreen({ mode, kode, skorIndividu, skorKolektif, r
         <h1 className="text-3xl md:text-5xl font-black mb-1 md:mb-4 relative z-10 tracking-tight drop-shadow-sm">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600">Kuis Selesai!</span>
         </h1>
-        <p className="text-lg md:text-2xl text-slate-500 mb-6 md:mb-10 font-bold">
-          {mode === 'kode' ? 'Kamu hebat hari ini!' : 'Kalian semua hebat hari ini!'}
-        </p>
+        <p className="text-lg md:text-2xl text-slate-500 mb-6 md:mb-10 font-bold">Kalian semua hebat hari ini!</p>
 
         {mode === 'giliran' ? (
           <div className="space-y-3 md:space-y-4 mb-8 md:mb-10 relative z-10">
@@ -54,17 +51,13 @@ export default function ResultScreen({ mode, kode, skorIndividu, skorKolektif, r
           <div className="mb-8 md:mb-10 relative z-10">
             <div className="relative bg-gradient-to-b from-purple-50 to-indigo-100 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl border-4 border-purple-300 py-6 md:py-8 px-4">
               <div className="h-8 bg-gradient-to-r from-purple-400 to-fuchsia-400 flex justify-center px-4 items-center relative z-10 mb-4 rounded-t-md">
-                <span className="text-white font-black text-[10px] tracking-widest uppercase drop-shadow">
-                  {mode === 'kode' ? `Bintang Paket ${kode}` : 'Bintang Kelas Kita'}
-                </span>
+                <span className="text-white font-black text-[10px] tracking-widest uppercase drop-shadow">Bintang Kelas Kita</span>
               </div>
               <div className="text-6xl md:text-8xl font-black text-slate-800 flex items-center justify-center gap-4 md:gap-6 drop-shadow-sm relative z-10">
                 {skorKolektif}
                 <Star className="w-14 h-14 md:w-20 md:h-20 text-amber-400 animate-bounce" strokeWidth={1.5} fill="currentColor" />
               </div>
-              <p className="text-xl md:text-2xl text-purple-700 mt-5 md:mt-6 font-black relative z-10">
-                {mode === 'kode' ? 'Bintang kamu, luar biasa!' : 'Kelas yang luar biasa!'}
-              </p>
+              <p className="text-xl md:text-2xl text-purple-700 mt-5 md:mt-6 font-black relative z-10">Kelas yang luar biasa!</p>
             </div>
           </div>
         )}

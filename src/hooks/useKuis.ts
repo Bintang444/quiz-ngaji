@@ -1,27 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import type { GameState, Mode, Soal } from '../types';
-import { BANK_SOAL, PAKET_SOAL, SEMUA_SOAL } from '../data/soal';
+import { BANK_SOAL } from '../data/soal';
 import { pustakaAudio } from '../utils/audio';
 
-const JUMLAH_SOAL_RAME = 7;
+const JUMLAH_SOAL_DEFAULT = 7;
 
-function inisialisasiPaket(kode: string | undefined) {
-  if (!kode) return { sisa: [] as number[], sekarang: null as Soal | null };
-  const paket = PAKET_SOAL[kode];
-  if (!paket) return { sisa: [] as number[], sekarang: null as Soal | null };
-  const ids = paket.map((s) => s.id);
-  const id = ids[Math.floor(Math.random() * ids.length)];
-  return {
-    sisa: ids.filter((x) => x !== id),
-    sekarang: paket.find((s) => s.id === id) ?? null,
-  };
-}
-
-export function useKuis(kodeAwal?: string) {
-  const { sisa: sisaAwal, sekarang: soalAwal } = inisialisasiPaket(kodeAwal);
-  const [mode, setMode] = useState<Mode | null>(kodeAwal ? 'kode' : null);
-  const [gameState, setGameState] = useState<GameState>(kodeAwal ? 'playing' : 'home');
-  const [kode, setKode] = useState<string | null>(kodeAwal ?? null);
+export function useKuis() {
+  const [mode, setMode] = useState<Mode | null>(null);
+  const [gameState, setGameState] = useState<GameState>('home');
 
   const [daftarAnak, setDaftarAnak] = useState<string[]>([]);
   const [inputNama, setInputNama] = useState('');
@@ -32,14 +18,14 @@ export function useKuis(kodeAwal?: string) {
   const [isSpinning, setIsSpinning] = useState(false);
   const [hasSpun, setHasSpun] = useState(false);
 
-  const [soalTersedia, setSoalTersedia] = useState<number[]>(sisaAwal);
-  const [soalSekarang, setSoalSekarang] = useState<Soal | null>(soalAwal);
+  const [soalTersedia, setSoalTersedia] = useState<number[]>([]);
+  const [soalSekarang, setSoalSekarang] = useState<Soal | null>(null);
   const [soalTerjawab, setSoalTerjawab] = useState(0);
   const [skorKolektif, setSkorKolektif] = useState(0);
   const [jawabanDipilih, setJawabanDipilih] = useState<string | null>(null);
   const [isBenar, setIsBenar] = useState<boolean | null>(null);
   const [feedbackAnim, setFeedbackAnim] = useState('');
-  const [totalSoal, setTotalSoal] = useState(kodeAwal ? PAKET_SOAL[kodeAwal]?.length ?? JUMLAH_SOAL_RAME : JUMLAH_SOAL_RAME);
+  const [totalSoal, setTotalSoal] = useState(JUMLAH_SOAL_DEFAULT);
   const autoTimer = useRef<number | null>(null);
 
   useEffect(() => {
@@ -52,35 +38,15 @@ export function useKuis(kodeAwal?: string) {
   }, []);
 
   const ambilSoalAcak = (sisaSoal: number[]) => {
-    const pool = sisaSoal.length === 0 ? SEMUA_SOAL.map((s) => s.id) : sisaSoal;
+    const pool = sisaSoal.length === 0 ? BANK_SOAL.map((s) => s.id) : sisaSoal;
     const idTerpilih = pool[Math.floor(Math.random() * pool.length)];
     return {
-      soal: SEMUA_SOAL.find((s) => s.id === idTerpilih)!,
+      soal: BANK_SOAL.find((s) => s.id === idTerpilih)!,
       sisaBaru: pool.filter((id) => id !== idTerpilih),
     };
   };
 
-  const pilihKode = (kodeDipilih: string) => {
-    const paket = PAKET_SOAL[kodeDipilih];
-    if (!paket) return false;
-    setMode('kode');
-    setKode(kodeDipilih);
-    setTotalSoal(paket.length);
-    const idPaket = paket.map((s) => s.id);
-    setSoalTersedia(idPaket);
-    const { soal, sisaBaru } = ambilSoalAcak(idPaket);
-    setSoalSekarang(soal);
-    setSoalTersedia(sisaBaru);
-    setSoalTerjawab(0);
-    setSkorKolektif(0);
-    setJawabanDipilih(null);
-    setIsBenar(null);
-    setFeedbackAnim('');
-    setGameState('playing');
-    return true;
-  };
-
-  const handlePilihMode = (selectedMode: Mode) => {
+  const handlePilihMode = (selectedMode: Mode, jumlahSoal: number = JUMLAH_SOAL_DEFAULT) => {
     setMode(selectedMode);
     const semuaIdSoal = BANK_SOAL.map((s) => s.id);
     setSoalTersedia(semuaIdSoal);
@@ -90,7 +56,7 @@ export function useKuis(kodeAwal?: string) {
       setDaftarAnak([]);
       setSkorIndividu({});
     } else {
-      setTotalSoal(JUMLAH_SOAL_RAME);
+      setTotalSoal(Math.min(Math.max(jumlahSoal, 1), BANK_SOAL.length));
       const { soal, sisaBaru } = ambilSoalAcak(semuaIdSoal);
       setSoalSekarang(soal);
       setSoalTersedia(sisaBaru);
@@ -204,26 +170,8 @@ export function useKuis(kodeAwal?: string) {
       clearTimeout(autoTimer.current);
       autoTimer.current = null;
     }
-    if (mode === 'kode' && kode) {
-      const paket = PAKET_SOAL[kode];
-      if (paket) {
-        const idPaket = paket.map((s) => s.id);
-        setSoalTersedia(idPaket);
-        const { soal, sisaBaru } = ambilSoalAcak(idPaket);
-        setSoalSekarang(soal);
-        setSoalTersedia(sisaBaru);
-        setSoalTerjawab(0);
-        setSkorKolektif(0);
-        setJawabanDipilih(null);
-        setIsBenar(null);
-        setFeedbackAnim('');
-        setGameState('playing');
-        return;
-      }
-    }
     setGameState('home');
     setMode(null);
-    setKode(null);
     setDaftarAnak([]);
     setSkorIndividu({});
     setAnakBelumMaju([]);
@@ -232,7 +180,6 @@ export function useKuis(kodeAwal?: string) {
 
   return {
     mode,
-    kode,
     gameState,
     daftarAnak,
     inputNama,
@@ -251,7 +198,6 @@ export function useKuis(kodeAwal?: string) {
     isBenar,
     feedbackAnim,
     handlePilihMode,
-    pilihKode,
     tambahAnak,
     mulaiGiliran,
     putarGacha,
