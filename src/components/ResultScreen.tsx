@@ -21,7 +21,7 @@ export default function ResultScreen({ mode, daftarAnak, skorKolektif, resetGame
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 relative z-10 text-center">
-      <div className="bg-white/90 backdrop-blur-xl p-6 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-2xl w-full max-w-2xl border border-white/60 relative overflow-hidden">
+      <div className="bg-white/95 p-6 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-2xl w-full max-w-2xl border border-white/60 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-32 md:h-40 bg-gradient-to-b from-yellow-200/60 to-transparent opacity-60" />
 
         <div className="mb-3 md:mb-6 relative z-10 flex justify-center">

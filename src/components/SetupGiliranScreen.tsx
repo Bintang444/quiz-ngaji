@@ -12,7 +12,7 @@ interface Props {
 export default function SetupGiliranScreen({ daftarAnak, inputNama, setInputNama, tambahAnak, mulaiGiliran, resetGame }: Props) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 relative z-10">
-      <div className="bg-white/90 backdrop-blur-xl p-6 md:p-9 rounded-[2rem] shadow-2xl w-full max-w-md border border-white/60 relative overflow-hidden">
+      <div className="bg-white/95 p-6 md:p-9 rounded-[2rem] shadow-2xl w-full max-w-md border border-white/60 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-28 bg-gradient-to-b from-orange-200/50 to-transparent opacity-60" />
         <h2 className="text-2xl md:text-3xl font-black mb-5 md:mb-7 text-center relative z-10 tracking-tight">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-rose-500">Daftar Nama</span>

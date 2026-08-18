@@ -27,7 +27,7 @@ export default function HomeScreen({ onPilihMode }: Props) {
           Kuis Ngaji • Sistem Aktif
         </span>
 
-        <div className="bg-white/90 backdrop-blur-xl p-6 md:p-10 rounded-[2rem] shadow-2xl border border-white/60 relative z-10 w-full">
+        <div className="bg-white/95 p-6 md:p-10 rounded-[2rem] shadow-2xl border border-white/60 relative z-10 w-full">
           <div className="mb-4 flex justify-center">
             <PartyPopper className="w-14 h-14 md:w-20 md:h-20 text-blue-500 animate-bounce" strokeWidth={1.5} />
           </div>
@@ -65,8 +65,8 @@ export default function HomeScreen({ onPilihMode }: Props) {
       </div>
 
       {showSoalCount && (
-        <div className="fixed inset-0 z-[60] bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-6">
-          <div className="bg-white/95 backdrop-blur-xl rounded-[2rem] shadow-2xl border border-white/60 w-full max-w-sm p-6 md:p-8 relative animate-fade-in">
+        <div className="fixed inset-0 z-[60] bg-slate-900/60 flex items-center justify-center p-6">
+          <div className="bg-white/95 rounded-[2rem] shadow-2xl border border-white/60 w-full max-w-sm p-6 md:p-8 relative animate-fade-in">
             <button
               onClick={() => setShowSoalCount(false)}
               className="absolute top-4 right-4 p-2 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors"

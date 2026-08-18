@@ -69,7 +69,7 @@ export default function GachaScreen({ gachaNameDisplay, isSpinning, hasSpun, put
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 relative z-10">
-      <div className="bg-white/90 backdrop-blur-xl p-6 md:p-10 rounded-[2rem] shadow-2xl w-full max-w-lg text-center border border-white/60 relative overflow-hidden">
+      <div className="bg-white/95 p-6 md:p-10 rounded-[2rem] shadow-2xl w-full max-w-lg text-center border border-white/60 relative overflow-hidden">
         <h2 className="text-2xl md:text-4xl font-black mb-6 md:mb-8 tracking-tight drop-shadow-sm relative z-10">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600">
             GILIRAN SIAPA YA?

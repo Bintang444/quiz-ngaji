@@ -67,7 +67,7 @@ export default function PlayingScreen({
 
   return (
     <div className="flex flex-col min-h-screen w-full max-w-2xl mx-auto p-4 relative z-10">
-      <div className="flex justify-between items-center bg-white/90 backdrop-blur-md p-3 md:p-5 rounded-2xl md:rounded-3xl shadow-lg mb-6 md:mb-8 sticky top-4 z-20 border border-white/60">
+      <div className="flex justify-between items-center bg-white/95 p-3 md:p-5 rounded-2xl md:rounded-3xl shadow-lg mb-6 md:mb-8 sticky top-4 z-20 border border-white/60">
         <div className="flex-1">
           <p className="text-[10px] md:text-xs text-slate-500 font-black mb-1 tracking-widest uppercase">Pertanyaan {currentProgress} / {totalProgress}</p>
           <div className="h-3 md:h-4 w-full bg-slate-200 rounded-full overflow-hidden shadow-inner">
@@ -118,7 +118,7 @@ export default function PlayingScreen({
 
         {jawabanDipilih !== null && (
           <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-50">
-            <div className={`bg-white/95 backdrop-blur-sm px-6 py-6 md:px-12 md:py-9 rounded-[1.75rem] md:rounded-[2.5rem] shadow-2xl border-4 transform transition-transform ${feedbackAnim} ${isBenar ? 'border-amber-300 rotate-2' : 'border-rose-300 -rotate-2'}`}>
+            <div className={`bg-white/95 px-6 py-6 md:px-12 md:py-9 rounded-[1.75rem] md:rounded-[2.5rem] shadow-2xl border-4 transform transition-transform ${feedbackAnim} ${isBenar ? 'border-amber-300 rotate-2' : 'border-rose-300 -rotate-2'}`}>
               <div className="flex items-center justify-center gap-3 md:gap-4 mb-2">
                 {isBenar ? (
                   <PartyPopper className="w-10 h-10 md:w-14 md:h-14 text-amber-500" strokeWidth={1.5} />
@@ -156,7 +156,7 @@ export default function PlayingScreen({
       <div className="mt-8 md:mt-10 pb-2 flex justify-center">
         <button
           onClick={resetGame}
-          className="text-sm font-bold text-slate-500 hover:text-slate-700 bg-white/90 backdrop-blur px-5 py-3 rounded-2xl shadow-md border-2 border-slate-200"
+          className="text-sm font-bold text-slate-500 hover:text-slate-700 bg-white/95 px-5 py-3 rounded-2xl shadow-md border-2 border-slate-200"
         >
           Akhiri Permainan
         </button>

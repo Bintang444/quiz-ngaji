@@ -26,15 +26,15 @@ export default function App() {
     <div className="min-h-screen bg-gradient-to-br from-sky-200 via-indigo-100 to-fuchsia-200 font-sans text-slate-800 overflow-hidden relative selection:bg-blue-200">
       <div id="flashBang" />
       <div className="fixed inset-0 pointer-events-none z-0 bg-grid-pattern">
-        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-sky-300/50 rounded-full mix-blend-multiply blur-[80px] animate-pulse" />
-        <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] bg-purple-300/50 rounded-full mix-blend-multiply blur-[80px] animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vw] bg-pink-300/50 rounded-full mix-blend-multiply blur-[80px] animate-pulse" style={{ animationDelay: '4s' }} />
+        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-sky-300/40 rounded-full blur-[40px]" />
+        <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] bg-purple-300/40 rounded-full blur-[40px]" />
+        <div className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vw] bg-pink-300/40 rounded-full blur-[40px]" />
       </div>
 
       <button
         onClick={toggleMusik}
         title={musikOn ? 'Matikan musik' : 'Nyalakan musik'}
-        className="fixed top-4 right-4 z-50 w-12 h-12 rounded-full bg-white/95 backdrop-blur border-4 border-slate-100 shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-transform"
+        className="fixed top-4 right-4 z-50 w-12 h-12 rounded-full bg-white/95 border-4 border-slate-100 shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-transform"
       >
         {musikOn ? <Music className="w-6 h-6 text-blue-600" /> : <VolumeX className="w-6 h-6 text-slate-400" />}
       </button>
